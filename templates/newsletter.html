@@ -3,620 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newsletter</title>
+    <title>Company Newsletter - Summer 2023</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --light: #f9fafb;
+            --dark: #1f2937;
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
         }
         
-        .newsletter-container {
-            max-width: 650px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        .logo {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 15px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            z-index: 2;
-            position: relative;
-        }
-        
-        .newsletter-title {
-            font-size: 28px;
-            margin-bottom: 10px;
-            font-weight: 700;
-            z-index: 2;
-            position: relative;
-        }
-        
-        .issue-info {
-            font-size: 16px;
-            opacity: 0.9;
-            z-index: 2;
-            position: relative;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            background: linear-gradient(135deg, #ff6b6b, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .featured-article {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-left: 5px solid;
-            border-image: linear-gradient(135deg, #ff6b6b, #feca57) 1;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .featured-article:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .article-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #feca57);
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-        
-        .article-title {
-            font-size: 22px;
-            color: #2d3748;
-            margin-bottom: 15px;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-        
-        .article-excerpt {
-            color: #4a5568;
-            margin-bottom: 20px;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 14px;
-            color: #718096;
-            margin-bottom: 20px;
-        }
-        
-        .read-more {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .read-more::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-        
-        .read-more:hover::before {
-            left: 100%;
-        }
-        
-        .read-more:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-        }
-        
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .article-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .article-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
-        }
-        
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-title {
-            font-size: 18px;
-            color: #2d3748;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-        
-        .card-excerpt {
-            color: #718096;
-            font-size: 14px;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        
-        .news-ticker {
-            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
-            border: 2px solid #4fd1c7;
-            border-radius: 16px;
-            padding: 20px;
-            margin: 25px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .news-ticker::before {
-            content: '📢';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 30px;
-            opacity: 0.2;
-        }
-        
-        .ticker-title {
-            color: #234e52;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        .ticker-content {
-            color: #2d5a5a;
-            font-size: 14px;
-        }
-        
-        .stats-section {
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        
-        .stats-title {
-            font-size: 20px;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 20px;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: #feca57;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 13px;
-            opacity: 0.8;
-        }
-        
-        .social-section {
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-        .social-title {
-            font-size: 20px;
-            color: #2d3748;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .social-links {
-            margin: 20px 0;
-        }
-        
-        .social-link {
-            display: inline-block;
-            width: 45px;
-            height: 45px;
+        .receipt-container {
+            max-width: 500px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
-            line-height: 45px;
-            text-decoration: none;
-            margin: 0 6px;
-            transition: all 0.3s ease;
-            font-size: 18px;
         }
         
-        .social-link:nth-child(1) { background: linear-gradient(135deg, #3b5998, #8b9dc3); }
-        .social-link:nth-child(2) { background: linear-gradient(135deg, #1da1f2, #0d8bd9); }
-        .social-link:nth-child(3) { background: linear-gradient(135deg, #0077b5, #00a0dc); }
-        .social-link:nth-child(4) { background: linear-gradient(135deg, #e4405f, #f56040); }
-        
-        .social-link:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+        .receipt-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-            overflow: hidden;
         }
         
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 8s ease-in-out infinite reverse;
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
         }
         
-        .cta-title {
-            font-size: 24px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            z-index: 2;
-            position: relative;
+        .total-section {
+            background-color: rgba(239, 246, 255, 0.8);
         }
         
-        .cta-text {
-            font-size: 16px;
-            margin-bottom: 25px;
-            opacity: 0.95;
-            z-index: 2;
-            position: relative;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        .print-btn {
             transition: all 0.3s ease;
-            z-index: 2;
-            position: relative;
         }
         
-        .cta-button:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .print-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
         }
         
-        .footer {
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-            color: white;
-            padding: 35px;
-            text-align: center;
+        .receipt-item:hover {
+            background-color: rgba(249, 250, 251, 0.7);
         }
         
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
-        }
-        
-        .footer-content {
-            margin-bottom: 20px;
-        }
-        
-        .footer-links {
-            margin: 15px 0;
-        }
-        
-        .footer-links a {
-            color: #feca57;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 600px) {
-            .newsletter-container {
-                margin: 10px;
-                border-radius: 16px;
+        @media print {
+            body * {
+                visibility: hidden;
             }
-            
-            .header, .content, .footer {
-                padding: 25px 20px;
+            .receipt-container, .receipt-container * {
+                visibility: visible;
             }
-            
-            .newsletter-title {
-                font-size: 24px;
+            .receipt-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
             }
-            
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .social-link {
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                margin: 0 4px;
-            }
-            
-            .cta-section {
-                padding: 30px 20px;
+            .no-print {
+                display: none !important;
             }
         }
     </style>
 </head>
-<body>
-    <div class="newsletter-container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">📰</div>
-            <h1 class="newsletter-title">[Newsletter Name]</h1>
-            <p class="issue-info">Issue #42 • [Date] • Weekly Edition</p>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="receipt-container bg-white mx-auto overflow-hidden">
+        <!-- Receipt Header -->
+        <div class="newsletter-header p-6 text-center bg-gradient-to-r from-blue-500 to-teal-400 text-white">
+            <div class="flex justify-center mb-4">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b456b155-c45a-4a60-af0f-47a818604f21.png" alt="Company newsletter logo" class="w-20 h-20 rounded-full border-4 border-white shadow-md">
+            </div>
+            <h1 class="text-3xl font-bold mb-2">Summer 2023</h1>
+            <p class="text-lg font-medium">Your Monthly Update</p>
         </div>
         
-        <!-- Main Content -->
-        <div class="content">
-            
-            <!-- News Ticker -->
-            <div class="news-ticker">
-                <div class="ticker-title">🔥 Breaking News</div>
-                <div class="ticker-content">
-                    [Insert breaking news or important announcement here - keep it short and impactful!]
-                </div>
-            </div>
-            
-            <!-- Featured Article Section -->
-            <div class="section">
-                <h2 class="section-title">🌟 Featured Story</h2>
-                <div class="featured-article">
-                    <span class="article-badge">Featured</span>
-                    <h3 class="article-title">[Main Article Headline Goes Here]</h3>
-                    <div class="article-meta">
-                        <span>📅 [Date]</span>
-                        <span>👤 By [Author Name]</span>
-                        <span>⏱️ 5 min read</span>
-                    </div>
-                    <p class="article-excerpt">
-                        This is where you'll place your compelling article excerpt that hooks readers and makes them want to click through to read the full story. Keep it engaging and informative...
-                    </p>
-                    <a href="#" class="read-more">Read Full Story →</a>
-                </div>
-            </div>
-            
-            <!-- Latest Articles Section -->
-            <div class="section">
-                <h2 class="section-title">📚 Latest Articles</h2>
-                <div class="articles-grid">
-                    <div class="article-card">
-                        <h4 class="card-title">[Article Title 1]</h4>
-                        <p class="card-excerpt">Brief description of the article content that entices readers to click and read more...</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </div>
-                    <div class="article-card">
-                        <h4 class="card-title">[Article Title 2]</h4>
-                        <p class="card-excerpt">Another engaging article excerpt that provides value and encourages engagement...</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </div>
-                    <div class="article-card">
-                        <h4 class="card-title">[Article Title 3]</h4>
-                        <p class="card-excerpt">Third article summary that showcases the quality content your readers can expect...</p>
-                        <a href="#" class="read-more">Read More</a>
+        <!-- Newsletter Content -->
+        <div class="p-6">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Featured Story</h2>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/303372c3-44f6-4835-b304-d2ecb2e52113.png" alt="Featured story visual" class="w-full md:w-1/2 rounded-lg shadow-md">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Our Exciting New Product Launch</h3>
+                        <p class="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+                        <a href="#" class="text-blue-600 font-medium hover:underline">Read more →</a>
                     </div>
                 </div>
             </div>
-            
-            <!-- Stats Section -->
-            <div class="stats-section">
-                <h3 class="stats-title">📊 This Week's Numbers</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-number">12.5K</span>
-                        <div class="stat-label">New Readers</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">847</span>
-                        <div class="stat-label">Shares</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">92%</span>
-                        <div class="stat-label">Open Rate</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">2.3K</span>
-                        <div class="stat-label">Comments</div>
-                    </div>
+
+            <div class="mb-8">
+                <div>
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">Receipt #</h3>
+                    <p class="font-medium">INV-2023-00142</p>
+                </div>
+                <div class="text-right">
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">Date</h3>
+                    <p class="font-medium">June 15, 2023</p>
                 </div>
             </div>
             
-            <!-- Quick Reads Section -->
-            <div class="section">
-                <h2 class="section-title">⚡ Quick Reads</h2>
-                <div class="articles-grid">
-                    <div class="article-card">
-                        <h4 class="card-title">💡 [Quick Tip Title]</h4>
-                        <p class="card-excerpt">A quick, actionable tip that readers can implement immediately...</p>
-                        <div style="font-size: 12px; color: #718096; margin-top: 10px;">2 min read</div>
-                    </div>
-                    <div class="article-card">
-                        <h4 class="card-title">🔍 [Industry Insight]</h4>
-                        <p class="card-excerpt">Brief industry update or trend analysis that keeps readers informed...</p>
-                        <div style="font-size: 12px; color: #718096; margin-top: 10px;">3 min read</div>
-                    </div>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">From</h3>
+                    <p class="font-medium">Modern Store Inc.</p>
+                    <p class="text-sm text-gray-600">123 Business Ave</p>
+                    <p class="text-sm text-gray-600">New York, NY 10001</p>
+                    <p class="text-sm text-gray-600">store@example.com</p>
+                </div>
+                <div class="text-right">
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">To</h3>
+                    <p class="font-medium">John Smith</p>
+                    <p class="text-sm text-gray-600">456 Customer St</p>
+                    <p class="text-sm text-gray-600">Brooklyn, NY 11201</p>
+                    <p class="text-sm text-gray-600">customer@example.com</p>
                 </div>
             </div>
             
-            <!-- Call to Action Section -->
-            <div class="cta-section">
-                <h3 class="cta-title">🚀 Ready to Level Up?</h3>
-                <p class="cta-text">Join thousands of subscribers who are already getting ahead with our premium content and exclusive insights!</p>
-                <a href="#" class="cta-button">Upgrade to Premium</a>
-            </div>
-            
-            <!-- Social Media Section -->
-            <div class="social-section">
-                <h3 class="social-title">🤝 Stay Connected</h3>
-                <p style="color: #718096; margin-bottom: 20px;">Follow us for daily updates and behind-the-scenes content</p>
-                <div class="social-links">
-                    <a href="#" class="social-link">📘</a>
-                    <a href="#" class="social-link">🐦</a>
-                    <a href="#" class="social-link">💼</a>
-                    <a href="#" class="social-link">📷</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e0770369-595f-460f-a67f-a293917cc3f8.png" alt="Article image" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Industry News Update</h3>
+                    <p class="text-gray-700 mb-3">Stay informed about the latest trends and developments in our industry...</p>
+                    <a href="#" class="text-blue-600 text-sm font-medium hover:underline">Read more →</a>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0c56c23e-17f7-4933-8c6a-2b6d208c4d02.png" alt="Article image" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Upcoming Events</h3>
+                    <p class="text-gray-700 mb-3">Mark your calendars for these exciting upcoming company events...</p>
+                    <a href="#" class="text-blue-600 text-sm font-medium hover:underline">Read more →</a>
                 </div>
             </div>
             
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <div class="footer-content">
-                <p><strong>[Newsletter Name]</strong> • Delivered with ❤️ every [Frequency]</p>
-                <p style="font-size: 14px; opacity: 0.8; margin-top: 10px;">
-                    Bringing you the best insights, stories, and updates from [Your Industry/Niche]
-                </p>
+            <!-- Newsletter Footer -->
+            <div class="text-center text-sm text-gray-600">
+                <div class="mb-4">
+                    <p>Follow us on social media:</p>
+                    <div class="flex justify-center space-x-4 mt-2">
+                        <a href="#" class="text-blue-500"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-pink-500"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-red-500"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <p>© 2023 Your Company Name. All rights reserved.</p>
+                <p class="mt-2"><a href="#" class="text-blue-600 hover:underline">Unsubscribe</a> | <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a></p>
             </div>
-            <div class="footer-links">
-                <a href="#">📧 Forward to a Friend</a>
-                <a href="#">🔗 View Online</a>
-                <a href="#">⚙️ Preferences</a>
-                <a href="#">❌ Unsubscribe</a>
-            </div>
-            <p style="font-size: 12px; opacity: 0.7; margin-top: 15px;">
-                © 2025 [Company Name]. All rights reserved.<br>
-                [Company Address] • [Contact Email]
-            </p>
         </div>
     </div>
+
+    <script>
+        // Newsletter specific JavaScript can go here if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Newsletter initialization
+        });
+    </script>
 </body>
 </html>
