@@ -1,100 +1,238 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Payment Receipt - MailTemplate</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f3f4f6;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #ffffff;
-      padding: 40px 30px;
-      border-radius: 8px;
-    }
-    .receipt-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    .receipt-table th,
-    .receipt-table td {
-      text-align: left;
-      padding: 10px;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .total-row {
-      font-weight: bold;
-      border-top: 2px solid #111827;
-    }
-    .footer {
-      font-size: 12px;
-      text-align: center;
-      color: #888888;
-      margin-top: 40px;
-    }
-    .cta-button {
-      display: inline-block;
-      margin-top: 24px;
-      background-color: #10b981;
-      color: white;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    @media only screen and (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Receipt Template</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --light: #f9fafb;
+            --dark: #1f2937;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        
+        .receipt-container {
+            max-width: 500px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+        
+        .receipt-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+            color: white;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+        }
+        
+        .total-section {
+            background-color: rgba(239, 246, 255, 0.8);
+        }
+        
+        .print-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+        
+        .receipt-item:hover {
+            background-color: rgba(249, 250, 251, 0.7);
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .receipt-container, .receipt-container * {
+                visibility: visible;
+            }
+            .receipt-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
-<body>
-  <table width="100%" bgcolor="#f3f4f6" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center">
-        <div class="container">
-          <h1 style="color: #111827;">💳 Payment Receipt</h1>
-          <p style="font-size: 16px; color: #374151;">Thank you for your payment. Here are your order details:</p>
-
-          <!-- Order Summary -->
-          <table class="receipt-table">
-            <tr>
-              <th>Item</th>
-              <th>Qty</th>
-              <th>Price</th>
-            </tr>
-            <tr>
-              <td>Pro Template Bundle</td>
-              <td>1</td>
-              <td>$15.00</td>
-            </tr>
-            <tr>
-              <td>Transaction Fee</td>
-              <td>-</td>
-              <td>$0.50</td>
-            </tr>
-            <tr class="total-row">
-              <td colspan="2">Total</td>
-              <td>$15.50</td>
-            </tr>
-          </table>
-
-          <a href="https://github.com/YOUR_ORG/mail-template-html" class="cta-button">View All Templates</a>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="receipt-container bg-white mx-auto overflow-hidden">
+        <!-- Receipt Header -->
+        <div class="receipt-header p-6 text-center">
+            <div class="flex justify-center mb-4">
+                <img src="https://placehold.co/100x100" alt="Business logo with circular shape in purple and white color scheme" class="w-20 h-20 rounded-full border-4 border-white shadow-md">
+            </div>
+            <h1 class="text-2xl font-bold mb-1">INVOICE</h1>
+            <p class="text-sm opacity-90">Thank you for your purchase!</p>
         </div>
-
-        <div class="footer">
-          MailTemplate • This receipt is for your records.<br>
-          Questions? Contact us at <a href="mailto:support@mailtemplate.dev" style="color:#888">support@mailtemplate.dev</a>
+        
+        <!-- Receipt Info -->
+        <div class="p-6">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">Receipt #</h3>
+                    <p class="font-medium">INV-2023-00142</p>
+                </div>
+                <div class="text-right">
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">Date</h3>
+                    <p class="font-medium">June 15, 2023</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">From</h3>
+                    <p class="font-medium">Modern Store Inc.</p>
+                    <p class="text-sm text-gray-600">123 Business Ave</p>
+                    <p class="text-sm text-gray-600">New York, NY 10001</p>
+                    <p class="text-sm text-gray-600">store@example.com</p>
+                </div>
+                <div class="text-right">
+                    <h3 class="font-semibold text-gray-600 text-xs uppercase">To</h3>
+                    <p class="font-medium">John Smith</p>
+                    <p class="text-sm text-gray-600">456 Customer St</p>
+                    <p class="text-sm text-gray-600">Brooklyn, NY 11201</p>
+                    <p class="text-sm text-gray-600">customer@example.com</p>
+                </div>
+            </div>
+            
+            <!-- Items Table -->
+            <div class="mb-6 overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left border-b">
+                            <th class="font-semibold text-gray-600 text-xs uppercase pb-2">Item</th>
+                            <th class="font-semibold text-gray-600 text-xs uppercase pb-2 text-right">Qty</th>
+                            <th class="font-semibold text-gray-600 text-xs uppercase pb-2 text-right">Price</th>
+                            <th class="font-semibold text-gray-600 text-xs uppercase pb-2 text-right">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receipt-items">
+                        <!-- Items will be added here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Totals -->
+            <div class="total-section p-4 rounded-lg mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Subtotal:</span>
+                    <span class="font-medium" id="subtotal">$0.00</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Tax (8%):</span>
+                    <span class="font-medium" id="tax">$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-medium">Shipping:</span>
+                    <span class="font-medium">$5.99</span>
+                </div>
+                
+                <div class="divider my-3"></div>
+                
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="total">$0.00</span>
+                </div>
+            </div>
+            
+            <!-- Payment Method -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-gray-600 text-xs uppercase mb-2">Payment Method</h3>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                        <i class="fab fa-cc-visa text-blue-800"></i>
+                    </div>
+                    <span class="font-medium">VISA ending in 4242</span>
+                </div>
+            </div>
+            
+            <!-- Notes -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-gray-600 text-xs uppercase mb-2">Notes</h3>
+                <p class="text-sm text-gray-600">Items can be returned within 30 days of purchase with original receipt.</p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="text-center text-sm text-gray-500">
+                <p>Thank you for shopping with us!</p>
+                <p>For questions, email support@example.com</p>
+            </div>
         </div>
-      </td>
-    </tr>
-  </table>
+        
+        <!-- Receipt Actions -->
+        <div class="no-print bg-gray-50 p-4 flex justify-center border-t">
+            <button onclick="window.print()" class="print-btn bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg flex items-center">
+                <i class="fas fa-print mr-2"></i> Print Receipt
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Sample receipt items data
+        const items = [
+            { name: "Wireless Headphones", qty: 1, price: 99.99 },
+            { name: "Smartphone Case", qty: 2, price: 19.99 },
+            { name: "USB-C Cable", qty: 3, price: 9.99 },
+            { name: "Wireless Charger", qty: 1, price: 29.99 }
+        ];
+        
+        // Calculate totals
+        function calculateTotals() {
+            const subtotal = items.reduce((sum, item) => sum + (item.qty * item.price), 0);
+            const tax = subtotal * 0.08;
+            const shipping = 5.99;
+            const total = subtotal + tax + shipping;
+            
+            document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+            document.getElementById('total').textContent = '$' + total.toFixed(2);
+        }
+        
+        // Render receipt items
+        function renderItems() {
+            const itemsContainer = document.getElementById('receipt-items');
+            itemsContainer.innerHTML = '';
+            
+            items.forEach(item => {
+                const subtotal = item.qty * item.price;
+                const row = document.createElement('tr');
+                row.className = 'receipt-item border-b border-gray-100 hover:bg-gray-50 transition-colors';
+                row.innerHTML = `
+                    <td class="py-3">
+                        <span class="font-medium">${item.name}</span>
+                    </td>
+                    <td class="py-3 text-right">${item.qty}</td>
+                    <td class="py-3 text-right">$${item.price.toFixed(2)}</td>
+                    <td class="py-3 text-right">$${subtotal.toFixed(2)}</td>
+                `;
+                itemsContainer.appendChild(row);
+            });
+            
+            calculateTotals();
+        }
+        
+        // Initialize receipt
+        document.addEventListener('DOMContentLoaded', renderItems);
+    </script>
 </body>
 </html>
